@@ -1,0 +1,57 @@
+sfTaskLogPlugin
+===============
+
+Overview
+--------
+
+The sfTaskLogPlugin package provides an easy way to log into file or database the log of your tasks
+
+Installation
+------------
+
+* Download and install the plugin
+
+        ./symfony plugin:install sfTaskLogPlugin
+
+* Clear the cache
+
+        ./symfony cc
+
+Configuration
+-------------
+
+Check if the plugin is active in your configuration project (/config/ProjectConfiguration.class.php file)
+
+        class ProjectConfiguration extends sfProjectConfiguration
+        {
+          public function setup()
+          {
+            $this->enablePlugins('sfTaskLogPlugin');
+          }
+        }
+
+Your task class must extends to sfTaskLog, sfTaskLogPropel or sfTaskLogDoctrine
+
+Three adapters are available :
+
+* sfTaskLogFile      : store log into a file in data/sf_task_log/[TASK NAMESPACE]/[TASK NAME]
+* sfTaskLogDb        : store log into a database (sf_task_log table)
+* sfTaskLogFileAndDb : store log into a file in data/sf_task_log/[TASK NAMESPACE]/[TASK NAME] and store log into a database (sf_task_log table)
+
+By default, the adapter is sfTaskLogFile, you can change it with app.yml :
+
+        all:
+          sfTaskLog:
+            class: sfTaskLogFile|sfTaskLogDb|sfTaskLogFileAndDb|[your own adapter]
+
+If you want create your own adapter, it must be implement sfTaskLogAdapter
+
+Contact
+-------
+
+* Simon Leblanc ( contact [at] leblanc-simon [dot] eu ), [http://www.leblanc-simon.fr](http://www.leblanc-simon.fr)
+* PortailPro ( s.leblanc [at] portailpro [dot] net ), [http://www.portailpro.net](http://www.portailpro.net)
+
+Changelog
+---------
+* Version 1.0.0 : initial release
